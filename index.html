@@ -25,16 +25,17 @@
     <label>شماره سریال:</label>
     <input type="text" id="serial-input" />
     <button onclick="searchBySerial()">جستجو</button>
-    <button onclick="startBarcodeScanner()">📷</button>
+    <button onclick="startZXingScanner()">📷</button>
   </div>
 
-  <div id="scanner" style="display:none; margin-top:20px;">
-    <div id="reader" style="width:100%;"></div>
-    <button onclick="stopScanner()">❌ توقف اسکن</button>
+  <div id="scanner" style="display:none; position:relative; margin-top:20px;">
+    <video id="video" style="width:100%;"></video>
+    <div style="position:absolute; top:50%; left:0; right:0; height:2px; background:red; z-index:10;"></div>
+    <button onclick="stopZXingScanner()">❌ توقف اسکن</button>
   </div>
 
   <script src="libs/xlsx.full.min.js"></script>
-  <script src="libs/html5-qrcode.min.js"></script>
+  <script src="libs/zxing.min.js"></script>
   <script src="app.js"></script>
   <script>
     if ("serviceWorker" in navigator) {
