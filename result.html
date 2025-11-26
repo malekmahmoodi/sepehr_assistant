@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <title>نتیجه جستجو</title>
+</head>
+<body>
+  <h2>📄 نتیجه جستجو</h2>
+  <div id="result"></div>
+
+  <script>
+    const result = JSON.parse(localStorage.getItem("searchResult"));
+    const container = document.getElementById("result");
+
+    if (result) {
+      for (const key in result) {
+        const p = document.createElement("p");
+        p.textContent = `${key}: ${result[key]}`;
+        container.appendChild(p);
+      }
+    } else {
+      container.textContent = "نتیجه‌ای یافت نشد.";
+    }
+  </script>
+</body>
+</html>

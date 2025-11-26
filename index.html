@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>جستجوی دستگاه</title>
+  <link rel="manifest" href="manifest.json" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <h2>📋 جستجوی اطلاعات دستگاه</h2>
+
+  <div>
+    <button onclick="document.getElementById('file-input').click()">📁 انتخاب فایل اطلاعات</button>
+    <input type="file" id="file-input" accept=".xlsx" onchange="loadExcelFile(event)" hidden />
+  </div>
+
+  <div>
+    <label>شماره پایانه:</label>
+    <input type="text" id="terminal-input" />
+    <button onclick="searchByTerminal()">جستجو</button>
+  </div>
+
+  <div>
+    <label>شماره سریال:</label>
+    <input type="text" id="serial-input" />
+    <button onclick="searchBySerial()">جستجو</button>
+    <button onclick="startBarcodeScanner()">📷</button>
+  </div>
+
+  <div id="scanner" style="display:none; margin-top:20px;">
+    <div id="reader" style="width:100%;"></div>
+    <button onclick="stopScanner()">❌ توقف اسکن</button>
+  </div>
+
+  <script src="libs/xlsx.full.min.js"></script>
+  <script src="libs/html5-qrcode.min.js"></script>
+  <script src="app.js"></script>
+  <script>
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker.register("service-worker.js");
+    }
+  </script>
+</body>
+</html>
