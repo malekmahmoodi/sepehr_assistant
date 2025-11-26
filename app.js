@@ -1,5 +1,5 @@
-﻿let excelData = [];
-let html5QrCode;
+let excelData = [];
+let codeReader;
 
 function loadExcelFile(event) {
   const file = event.target.files[0];
@@ -7,24 +7,28 @@ function loadExcelFile(event) {
 
   const reader = new FileReader();
   reader.onload = function (e) {
-    const data = new Uint8Array(e.target.result);
-    const workbook = XLSX.read(data, { type: 'array' });
-    const sheet = workbook.Sheets[workbook.SheetNames[0]];
-    excelData = XLSX.utils.sheet_to_json(sheet);
-    alert("فایل با موفقیت بارگذاری شد.");
+    try {
+      const data = new Uint8Array(e.target.result);
+      const workbook = XLSX.read(data, { type: 'array' });
+      const sheet = workbook.Sheets[workbook.SheetNames[0]];
+      excelData = XLSX.utils.sheet_to_json(sheet);
+      alert("✅ فایل با موفقیت بارگذاری شد.");
+    } catch (err) {
+      alert("❌ خطا در خواندن فایل:\n" + err.message);
+    }
   };
   reader.readAsArrayBuffer(file);
 }
 
 function searchByTerminal() {
   const terminal = document.getElementById("terminal-input").value.trim();
-  const result = excelData.find(row => row["terminal"] == terminal);
+  const result = excelData.find(row => row["پایانه"] == terminal);
   showResult(result);
 }
 
 function searchBySerial() {
   const serial = document.getElementById("serial-input").value.trim();
-  const result = excelData.find(row => row["serial"] == serial);
+  const result = excelData.find(row => row["سریال"] == serial);
   showResult(result);
 }
 
@@ -37,24 +41,22 @@ function showResult(result) {
   window.location.href = "result.html";
 }
 
-function startBarcodeScanner() {
+function startZXingScanner() {
   document.getElementById("scanner").style.display = "block";
-  html5QrCode = new Html5Qrcode("reader");
-  html5QrCode.start(
-    { facingMode: "environment" },
-    { fps: 10, qrbox: 250 },
-    (decodedText) => {
-      document.getElementById("serial-input").value = decodedText;
-      stopScanner();
+  const video = document.getElementById("video");
+
+  codeReader = new ZXing.BrowserMultiFormatReader();
+  codeReader.decodeFromVideoDevice(null, video, (result, err) => {
+    if (result) {
+      document.getElementById("serial-input").value = result.text;
+      stopZXingScanner();
     }
-  );
+  });
 }
 
-function stopScanner() {
-  if (html5QrCode) {
-    html5QrCode.stop().then(() => {
-      html5QrCode.clear();
-      document.getElementById("scanner").style.display = "none";
-    });
+function stopZXingScanner() {
+  if (codeReader) {
+    codeReader.reset();
+    document.getElementById("scanner").style.display = "none";
   }
 }
