@@ -19,12 +19,13 @@
   <link rel="manifest" href="manifest.json" />
   <link rel="stylesheet" href="style.css" />
 </head>
-<body>
+<body class="mx-auto">
   <div class="container-fluid bg-dark text-info p-3  text-center">
   <h2>📋 جستجوی اطلاعات دستگاه</h2>
   </div>
  
 <!-- <div class="d-flex flex-column bg-light border p2 text-center"> -->
+  <div class="container border rounded-3 border-info mt-2">
   <div class="container-fluid row text-center pt-2">
     <div class="col-2"></div>
     <div class="col-8">
@@ -37,22 +38,25 @@
   
 
   <div class="row justify-content-center text-center pt-2">
-  <div class="col-3">
+<div class="col-1"></div>  
+<div class="col-2">
     <label>شماره پایانه:</label>
     </div>
-    <div class="col-5">
+    <div class="col-4">
     <input class="w-100 form-control" type="text" id="terminal-input" />
     </div>
     <div class="col-4">
     <button class="btn btn-secondary border w-100" onclick="searchByTerminal()">جستجو</button>
     </div>
+    <div class="col-1"></div>
   </div>
 
-    <div class="row justify-content-center text-center pt-2">
-  <div class="col-3">
+    <div class="row justify-content-center text-center pt-2 pb-2">
+    <div class="col-1"></div>
+  <div class="col-2">
     <label >شماره سریال:</label>
     </div>
-    <div class="col-5">
+    <div class="col-4">
     <input class="w-100 form-control" type="text" id="serial-input" />
     </div>
     <div class="col-3">
@@ -61,6 +65,7 @@
     <div class="col-1">
     <button class = "btn btn-warning w-100" onclick="startZXingScanner()">📷</button>
     </div>
+    <div class="col-1"></div>
   </div>
 
   <div id="scanner" style="display:none; position:relative; margin-top:20px;">
@@ -68,8 +73,7 @@
     <div style="position:absolute; top:50%; left:0; right:0; height:2px; background:red; z-index:10;"></div>
     <button onclick="stopZXingScanner()">❌ توقف اسکن</button>
   </div>
-
-  
+</div>
   <script src="libs/xlsx.full.min.js"></script>
   <script src="libs/zxing.min.js"></script>
   <script src="app.js"></script>
@@ -80,6 +84,7 @@
   </script>
 </body>
 </html>
+
 
 
 
