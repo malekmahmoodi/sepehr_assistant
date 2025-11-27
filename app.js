@@ -23,12 +23,21 @@ function loadExcelFile(event) {
 function searchByTerminal() {
   const terminal = document.getElementById("terminal-input").value.trim();
   const result = excelData.find(row => row["terminal"] == terminal);
+  if (!result){
+    result = excelData.find(row => row["ترمینال"] == terminal);
+  }
+  else if (!result){
+    result = excelData.find(row => row["پایانه"] == terminal);
+  }
   showResult(result);
 }
 
 function searchBySerial() {
   const serial = document.getElementById("serial-input").value.trim();
   const result = excelData.find(row => row["serial"] == serial);
+  if (!result){
+    result = excelData.find(row => row["سریال"] == serial);
+  }
   showResult(result);
 }
 
@@ -60,4 +69,5 @@ function stopZXingScanner() {
     document.getElementById("scanner").style.display = "none";
   }
 }
+
 
