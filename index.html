@@ -31,17 +31,17 @@
     <button class="btn btn-primary w-75" onclick="document.getElementById('file-input').click()">📁 انتخاب فایل اطلاعات</button>
     <input type="file" id="file-input" accept=".xlsx" onchange="loadExcelFile(event)" hidden />
     </div>
-    
+  </div>   
     
   
 
-  <div class="">
+  <div class="row">
     <label>شماره پایانه:</label>
     <input type="text" id="terminal-input" />
     <button onclick="searchByTerminal()">جستجو</button>
   </div>
 
-  <div class="">
+  <div class="row">
     <label>شماره سریال:</label>
     <input type="text" id="serial-input" />
     <button onclick="searchBySerial()">جستجو</button>
@@ -53,7 +53,7 @@
     <div style="position:absolute; top:50%; left:0; right:0; height:2px; background:red; z-index:10;"></div>
     <button onclick="stopZXingScanner()">❌ توقف اسکن</button>
   </div>
-</div>
+
   
   <script src="libs/xlsx.full.min.js"></script>
   <script src="libs/zxing.min.js"></script>
@@ -65,6 +65,7 @@
   </script>
 </body>
 </html>
+
 
 
 
