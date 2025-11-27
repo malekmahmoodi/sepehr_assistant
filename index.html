@@ -24,10 +24,11 @@
   <h2>📋 جستجوی اطلاعات دستگاه</h2>
   </div>
  <hr/><hr/>
-<div class="d-flex flex-column bg-light border p2 text-center">
+<!-- <div class="d-flex flex-column bg-light border p2 text-center"> -->
+  <div class="row">
   
     
-    <div class="p-5 m-5">
+    <div class="col-6 col-sm-6 col-l-6 col-xl-6">
     <button class="btn btn-primary w-75" onclick="document.getElementById('file-input').click()">📁 انتخاب فایل اطلاعات</button>
     <input type="file" id="file-input" accept=".xlsx" onchange="loadExcelFile(event)" hidden />
     </div>
@@ -65,6 +66,7 @@
   </script>
 </body>
 </html>
+
 
 
 
