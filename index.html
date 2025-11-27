@@ -24,7 +24,7 @@
   <h2>📋 جستجوی اطلاعات دستگاه</h2>
   </div>
   
-
+<div class="container bg-secondary">
   <div class="container text-center bg-secondary text-important">
     <button class="btn btn-primary" onclick="document.getElementById('file-input').click()">📁 انتخاب فایل اطلاعات</button>
     <input type="file" id="file-input" accept=".xlsx" onchange="loadExcelFile(event)" hidden />
@@ -48,7 +48,8 @@
     <div style="position:absolute; top:50%; left:0; right:0; height:2px; background:red; z-index:10;"></div>
     <button onclick="stopZXingScanner()">❌ توقف اسکن</button>
   </div>
-
+</div>
+  
   <script src="libs/xlsx.full.min.js"></script>
   <script src="libs/zxing.min.js"></script>
   <script src="app.js"></script>
@@ -59,6 +60,7 @@
   </script>
 </body>
 </html>
+
 
 
 
