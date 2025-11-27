@@ -50,6 +50,50 @@ function showResult(result) {
   window.location.href = "result.html";
 }
 
+function startScanner() {
+  document.getElementById("scanner").style.display = "block";
+
+  Quagga.init({
+    inputStream: {
+      name: "Live",
+      type: "LiveStream",
+      target: document.querySelector('#interactive'),
+      constraints: {
+        facingMode: "environment", // دوربین پشتی
+        aspectRatio: { min: 1, max: 2 },
+      }
+    },
+    decoder: {
+      readers: ["code_128_reader"]
+    },
+    locate: true, // فعال‌سازی تشخیص خودکار موقعیت بارکد
+    locator: {
+      patchSize: "medium", // یا "large" برای بارکدهای بزرگ‌تر
+      halfSample: false
+    },
+    numOfWorkers: 2,
+    frequency: 10
+  }, function(err) {
+    if (err) {
+      console.error(err);
+      alert("خطا در راه‌اندازی اسکنر");
+      return;
+    }
+    Quagga.start();
+  });
+
+  Quagga.onDetected(function(result) {
+    const code = result.codeResult.code;
+    document.getElementById("serial-input").value = code;
+    stopScanner();
+  });
+}
+
+function stopScanner() {
+  Quagga.stop();
+  document.getElementById("scanner").style.display = "none";
+}
+
 function startZXingScanner() {
   document.getElementById("scanner").style.display = "block";
   const video = document.getElementById("video");
@@ -69,5 +113,6 @@ function stopZXingScanner() {
     document.getElementById("scanner").style.display = "none";
   }
 }
+
 
 
